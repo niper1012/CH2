@@ -8,15 +8,11 @@
 import SwiftUI
 
 struct ExploreView: View {
-  
-    
-    //SHOULD THE POPOVER BE VISIBLE?
-    @State var showPopover = false
-    
-    //WHICH FILTER OPTION IS ACTIVE?
+
+    //VAR TO ESTABLISH THE CURRENT FILTERING
     @State private var selectedFilter = "All"
-    
-//DCOMS ARRAY
+
+    //DCOMS ARRAY
     var dcoms: [Movie] = [
         Movie(
             movieImage: "High School Musical",
@@ -42,7 +38,7 @@ struct ExploreView: View {
 
         ),
     ]
-    
+
     //MUSICALS ARRAY
 
     var musicals: [Movie] = [
@@ -63,11 +59,11 @@ struct ExploreView: View {
             category: "Film"
         ),
     ]
-    
+
     //LATEST SHOWS ARRAY
 
     var latesttvshows: [Movie] = [
-        
+
         Movie(
             movieImage: "A man on the inside",
             movieName: "A man on the inside",
@@ -83,13 +79,17 @@ struct ExploreView: View {
             movieName: "The good place",
             category: "Serie"
         ),
-        Movie(movieImage: "Stranger Things", movieName: "Stranger Things", category: "Serie"),
-        
+        Movie(
+            movieImage: "Stranger Things",
+            movieName: "Stranger Things",
+            category: "Serie"
+        ),
+
     ]
-    
+
     // ART HOUSE TV ARRAY
     var arthousetv: [Movie] = [
-        
+
         Movie(
             movieImage: "Fleabag",
             movieName: "Fleabag",
@@ -105,14 +105,12 @@ struct ExploreView: View {
             movieName: "My brilliant firend",
             category: "Serie"
         ),
-      
+
     ]
-    
-    
-    
+
     // INDIE GEMS ARRAY
     var indiegems: [Movie] = [
-        
+
         Movie(
             movieImage: "Ama gloria",
             movieName: "Ama Gloria",
@@ -133,179 +131,187 @@ struct ExploreView: View {
             movieName: "Kneecap",
             category: "Serie"
         ),
-      
+
     ]
 
     var body: some View {
 
         //my outer container
-        NavigationStack {
+        ZStack {
+            NavigationStack {
 
-            //how the screen works in the container
-            ScrollView(.vertical) {
+                //how the screen works in the container
+                ScrollView(.vertical) {
 
-                //the ''box'' containing the content
-                VStack(alignment: .leading, spacing: 20) {
-                   
-                    
-                    
-                    //INDIE GEMS SECTION
-                    HStack {
-                        Button(action: {
-                            print("Right icon tapped")
-                        }) {
-                            Text("Indie Gems")
-                                .font(.title).bold()
-                                .foregroundStyle((Color(.white)))
-                            Image(systemName: "chevron.right")
-                                .bold().foregroundStyle(Color.gray)
+                    //the ''box'' containing the content
+                    VStack(alignment: .leading, spacing: 20) {
+
+                        //INDIE GEMS SECTION
+                        if selectedFilter == "All" || selectedFilter == "Movies"
+                        {
+                            HStack {
+                                Button(action: {
+                                    print("Right icon tapped")
+                                }) {
+                                    Text("Indie Gems")
+                                        .font(.title).bold()
+                                        .foregroundStyle((Color(.white)))
+                                    Image(systemName: "chevron.right")
+                                        .bold().foregroundStyle(Color.gray)
+                                }
+                            }
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                HStack(spacing: 20) {
+
+                                    ForEach(indiegems) { movie in
+                                        ExploreCardView(movie: movie)
+                                    }
+                                }
+
+                            }
+
+                            //DCOMs SECTION
+                            HStack {
+                                Button(action: {
+                                    print("Right icon tapped")
+                                }) {
+                                    Text("DCOMs")
+                                        .font(.title).bold()
+                                        .foregroundStyle((Color(.white)))
+                                    Image(systemName: "chevron.right")
+                                        .bold().foregroundStyle(Color.gray)
+                                }
+                            }
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                HStack(spacing: 20) {
+
+                                    ForEach(dcoms) { movie in
+                                        ExploreCardView(movie: movie)
+                                    }
+                                }
+
+                            }
+                            //MUSICALS SECTION
+
+                            HStack {
+                                Button(action: {
+                                    print("Right icon tapped")
+                                }) {
+                                    Text("Musicals")
+                                        .font(.title).bold()
+                                        .foregroundStyle((Color(.white)))
+                                    Image(systemName: "chevron.right")
+                                        .bold().foregroundStyle(Color.gray)
+                                }
+                            }
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                HStack(spacing: 20) {
+
+                                    ForEach(musicals) { movie in
+                                        ExploreCardView(movie: movie)
+                                    }
+                                }
+                            }
                         }
-                    }
 
-                    ScrollView(.horizontal, showsIndicators: false) {
+                        //LATEST SHOWS SECTION
 
-                        HStack(spacing: 20) {
+                        if selectedFilter == "All"
+                            || selectedFilter == "TV Shows"
+                        {
+                            HStack {
+                                Button(action: {
+                                    print("Right icon tapped")
+                                }) {
+                                    Text("Latest Shows")
+                                        .font(.title).bold()
+                                        .foregroundStyle((Color(.white)))
+                                    Image(systemName: "chevron.right")
+                                        .bold().foregroundStyle(Color.gray)
+                                }
+                            }
 
-                            ForEach(indiegems) { movie in
-                                ExploreCardView(movie: movie)
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                HStack(spacing: 20) {
+
+                                    ForEach(latesttvshows) { movie in
+                                        ExploreCardView(movie: movie)
+                                    }
+                                }
+
+                            }
+
+                            //ART HOUSE TV SECTION
+                            HStack {
+                                Button(action: {
+                                    print("Right icon tapped")
+                                }) {
+                                    Text("Art House Tv")
+                                        .font(.title).bold()
+                                        .foregroundStyle((Color(.white)))
+                                    Image(systemName: "chevron.right")
+                                        .bold().foregroundStyle(Color.gray)
+                                }
+                            }
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+
+                                HStack(spacing: 20) {
+
+                                    ForEach(arthousetv) { movie in
+                                        ExploreCardView(movie: movie)
+                                    }
+                                }
+
                             }
                         }
 
                     }
-
-                    //DCOMs SECTION
-                    HStack {
-                        Button(action: {
-                            print("Right icon tapped")
-                        }) {
-                            Text("DCOMs")
-                                .font(.title).bold()
-                                .foregroundStyle((Color(.white)))
-                            Image(systemName: "chevron.right")
-                                .bold().foregroundStyle(Color.gray)
-                        }
-                    }
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-
-                        HStack(spacing: 20) {
-
-                            ForEach(dcoms) { movie in
-                                ExploreCardView(movie: movie)
-                            }
-                        }
-
-                    }
-                    //MUSICALS SECTION
-
-                    HStack {
-                        Button(action: {
-                            print("Right icon tapped")
-                        }) {
-                            Text("Musicals")
-                                .font(.title).bold()
-                                .foregroundStyle((Color(.white)))
-                            Image(systemName: "chevron.right")
-                                .bold().foregroundStyle(Color.gray)
-                        }
-                    }
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-
-                        HStack(spacing: 20) {
-
-                            ForEach(musicals) { movie in
-                                ExploreCardView(movie: movie)
-                            }
-                        }
-
-                    }
-
-                    //LATEST SHOWS SECTION
-
-                    HStack {
-                        Button(action: {
-                            print("Right icon tapped")
-                        }) {
-                            Text("Latest Shows")
-                                .font(.title).bold()
-                                .foregroundStyle((Color(.white)))
-                            Image(systemName: "chevron.right")
-                                .bold().foregroundStyle(Color.gray)
-                        }
-                    }
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-
-                        HStack(spacing: 20) {
-
-                            ForEach(latesttvshows) { movie in
-                                ExploreCardView(movie: movie)
-                            }
-                        }
-
-                    }
-                    
-                    //ART HOUSE TV SECTION
-                    HStack {
-                        Button(action: {
-                            print("Right icon tapped")
-                        }) {
-                            Text("Art House Tv")
-                                .font(.title).bold()
-                                .foregroundStyle((Color(.white)))
-                            Image(systemName: "chevron.right")
-                                .bold().foregroundStyle(Color.gray)
-                        }
-                    }
-
-                    ScrollView(.horizontal, showsIndicators: false) {
-
-                        HStack(spacing: 20) {
-
-                            ForEach(arthousetv) { movie in
-                                ExploreCardView(movie: movie)
-                            }
-                        }
-
-                    }
-
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding()
-            }
-
-            .navigationTitle("Explore")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-
-                // TRAILING FILTER BUTTON
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showPopover.toggle()
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease")
-                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
                 }
 
-                // LEADING GEAR BUTTON
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        print("Right icon tapped")
-                    } label: {
-                        Image(systemName: "gear")
-                            .glassEffect()
+                .navigationTitle("Explore")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+
+                    // TRAILING FILTER BUTTON
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+
+                            Button("All") { selectedFilter = "All" }
+                            Button("Movies") { selectedFilter = "Movies" }
+                            Button("TV Shows") { selectedFilter = "TV Shows" }
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease")
+
+                        }
+                    }
+
+                    // LEADING GEAR BUTTON
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            print("Right icon tapped")
+                        } label: {
+                            Image(systemName: "gear")
+                                .glassEffect()
+                        }
                     }
                 }
-            }
 
-                }
             }
 
         }
+    }
 
-    
-
+}
 
 #Preview {
     ExploreView()
