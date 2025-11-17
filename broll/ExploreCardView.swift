@@ -15,17 +15,20 @@ struct ExploreCardView: View {
 
     var body: some View {
 
+        
         VStack(alignment: .leading) {
 
-            Image(movie.movieImage)
-                
-                .resizable()
-                .scaledToFill()
             
-                .frame(width: 150, height: 230, alignment: .leading)
-               
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .glassEffect(.clear, in: .rect(cornerRadius: 10))
+                Image(movie.movieImage)
+                
+                    .resizable()
+                    .scaledToFill()
+                
+                    .frame(width: 150, height: 230, alignment: .leading)
+                
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .glassEffect(.clear, in: .rect(cornerRadius: 10))
+            
                
                 
 
@@ -44,7 +47,8 @@ struct ExploreCardView: View {
         movie: Movie(
             movieImage: "High School Musical",
             movieName: "High School Musical", 
-            category: "Film"
+            category: "Film",
+            description: ""
         )
     )
 }

@@ -12,4 +12,6 @@ struct Movie: Identifiable {
     var movieImage: String
     var movieName: String
     var category: String  //Film or TV Series
+    var description: String
+    
 }
